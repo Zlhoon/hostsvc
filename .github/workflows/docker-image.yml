@@ -30,7 +30,7 @@ jobs:
       - name: 1. Checkout
         uses: actions/checkout@v3
         with:
-          repository: "kajh7570/hostsvc-cd"
+          repository: "Zlhoon/hostsvc-cd"
           token: ${{ secrets.GITHAB_TOKEN }}
       - name: 2. Change Docker Tag
         run: | 
