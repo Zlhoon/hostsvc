@@ -25,6 +25,7 @@ jobs:
         tags: kajh7570/hostservice:${{ github.sha }} #docker tags, 자신의 id
   updateYaml:
     runs-on: ubuntu-latest
+    needs: buildImage # updateYaml은 biulImage가 끝나야 실행되게 끔 설정
     steps:
       - name: 1. Checkout
         uses: actions/checkout@v3
