@@ -22,4 +22,20 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: kajh7570/hostservice:${{ github.sha }}
+        tags: kajh7570/hostservice:${{ github.sha }} #docker tags, 자신의 id
+  updateYaml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: "kajh7570/hostsvc-cd"
+          token: ${{ secrets.GITHAB_TOKEN }}
+      - name: 2. Change Docker Tag
+        run: | 
+          sed "s/image: kajh7570\/node-app:.*/images: kajh7570\/node-app:${{ github.sha }}/g"
+          git config --global user.email "kajh7570@naver.com"
+          git config --global user.name "Zlhoon"
+          git commit -am "triggered by github "
+          git commit -am "triggered by github action"
+          git push origin main
